@@ -3,5 +3,5 @@
 using namespace std;
 int main(){
 cout << "hello_word\n";
-return 0
+return 0;
 }
