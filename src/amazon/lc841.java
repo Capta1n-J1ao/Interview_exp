@@ -33,26 +33,26 @@ public class lc841 {
     }
 
     public static void main(String[] args) {
-        List<Integer> l1 = new LinkedList<>(){
+        List<Integer> l1 = new LinkedList<Integer>(){
             {
                 this.add(1);
             }
         };
 
-        List<Integer> l2 = new LinkedList<>(){
+        List<Integer> l2 = new LinkedList<Integer>(){
             {
                 this.add(2);
             }
         };
 
-        List<Integer> l3 = new LinkedList<>(){
+        List<Integer> l3 = new LinkedList<Integer>(){
             {
                 this.add(3);
             }
         };
 
         List<Integer> l4 = new LinkedList<>();
-        List<List<Integer>> list = new LinkedList<>(){{
+        List<List<Integer>> list = new LinkedList(){{
            this.add(l1);
            add(l2);
            add((l3));
