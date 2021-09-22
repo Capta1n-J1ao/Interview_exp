@@ -13,7 +13,9 @@ public class lc547 {
         union = new int[cLen];
         for(int i = 0; i < cLen; i++) union[i] = i;
         for(int i = 0; i < cLen; i++){
-            for(int k = 0; k < cLen; k++){
+//            20210921二刷：下面这句话还有优化空间
+//            for(int k = 0; k < cLen; k++){
+            for(int k = i + 1; k < cLen; k++){
                 if(i == k) continue;
                 if(isConnected[i][k] == 1){
                     merge(i, k);

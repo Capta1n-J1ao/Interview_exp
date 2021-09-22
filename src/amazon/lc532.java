@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class lc532 {
+//    twitter OA，过了一遍20210921
     public int findPairs(int[] nums, int k) {
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         int res = 0;

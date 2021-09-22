@@ -2,6 +2,8 @@ package amazon;
 
 /*
 lc40和lc47很像，建议在一起联系，体会差别
+在刷twitter OA的时候发现这道题目和lc780这类题目有一个很像的地方那就是
+在思考剪枝问题或者一些路径问题的时候都要画出树状图帮助思考
 
 这道题目一开始自己做，想的方法就是用BackTracking，但是有个问题就是会有重复值
 于是想了个之前用过的把重复的答案变成String然后放到hashset里面，这样来达到去重的效果
@@ -70,48 +72,81 @@ public class lc40 {
 //    }
 
 //    方法二：优化
+//    private int[] candidates;
+//    private int target, cLen;
+//    private List<List<Integer>> res;
+//    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+//        this.candidates = candidates;
+//        this.target = target;
+//        this.res = new ArrayList<>();
+//        this.cLen = candidates.length;
+//        Arrays.sort(candidates);
+//        BackTracking(0, new LinkedList<>(), target);
+//        return res;
+//    }
+//
+//    private void BackTracking(int index, List<Integer> curRes, int target){
+//        if(target == 0){
+//            res.add(new LinkedList<>(curRes));
+//            return;
+//        }
+////        相对于方法一，主要修改都在这里
+//        for(int i = index; i < cLen; i++){
+//            if(candidates[i] > target) break;
+//            if(i > index && candidates[i] == candidates[i - 1]) continue;
+//            curRes.add(candidates[i]);
+////            System.out.println(curRes);
+////            System.out.println(target);
+////            System.out.println(i);
+//            BackTracking(i + 1, curRes, target - candidates[i]);
+//            curRes.remove(curRes.size() - 1);
+//        }
+//    }
+
+
+//    二刷20210921，twitter OA
     private int[] candidates;
     private int target, cLen;
-    private List<List<Integer>> res;
+    List<List<Integer>> res;
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         this.candidates = candidates;
         this.target = target;
-        this.res = new ArrayList<>();
         this.cLen = candidates.length;
+        res = new LinkedList<List<Integer>>();
         Arrays.sort(candidates);
-        BackTracking(0, new LinkedList<>(), target);
+        BackTracking(0, target, new LinkedList<>());
         return res;
     }
 
-    private void BackTracking(int index, List<Integer> curRes, int target){
+    private void BackTracking(int index, int target, List<Integer> curRes){
         if(target == 0){
             res.add(new LinkedList<>(curRes));
             return;
         }
-//        相对于方法一，主要修改都在这里
         for(int i = index; i < cLen; i++){
-            if(candidates[i] > target) break;
-            if(i > index && candidates[i] == candidates[i - 1]) continue;
+            if(target - candidates[index] < 0) break;
+//            这样这两句话的区别，很tricky
+//            if(i > 0 && candidates[i - 1] == candidates[i]) continue;
+            if(i > index && candidates[i - 1] == candidates[i]) continue;
             curRes.add(candidates[i]);
-//            System.out.println(curRes);
-//            System.out.println(target);
-//            System.out.println(i);
-            BackTracking(i + 1, curRes, target - candidates[i]);
+            BackTracking(i + 1, target - candidates[i], curRes);
             curRes.remove(curRes.size() - 1);
         }
     }
 
+
     public static void main(String[] args) {
 //        int[] test = {10,1,2,7,6,1,5};
+////        答案是： [[1,1,6],[1,2,5],[1,7],[2,6]]
 //        System.out.println(new lc40().combinationSum2(test, 8));
 
-//        int[] test = {2,5,2,1,2};
-//        System.out.println(new lc40().combinationSum2(test, 5));
+        int[] test = {2,5,2,1,2};
+        System.out.println(new lc40().combinationSum2(test, 5));
 
 //        int[] test = {3,1,3,5,1,1};
 //        System.out.println(new lc40().combinationSum2(test, 8));
 
-        int[] test = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-        System.out.println(new lc40().combinationSum2(test, 30));
+//        int[] test = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+//        System.out.println(new lc40().combinationSum2(test, 30));
     }
 }

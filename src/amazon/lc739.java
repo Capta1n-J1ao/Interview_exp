@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Deque;
 
 public class lc739 {
+//    twitter OA 20210921过了一遍
     public int[] dailyTemperatures(int[] T) {
         int tLen = T.length;
         Deque<Integer> stack = new ArrayDeque<>();
